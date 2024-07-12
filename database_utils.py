@@ -1,6 +1,6 @@
 # database_utils.py
 import yaml
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 class DatabaseConnector:
     def __init__(self, creds_path):
@@ -22,7 +22,7 @@ class DatabaseConnector:
     def list_db_tables(self):
         engine = self.init_db_engine()
         with engine.connect() as connection:
-            result = connection.execute("SELECT table_name FROM information_schema.tables WHERE table_schema='public';")
+            result = connection.execute(text("SELECT table_name FROM information_schema.tables WHERE table_schema='public';"))
             tables = result.fetchall()
             table_list = [table[0] for table in tables]
             return table_list
@@ -34,8 +34,7 @@ class DatabaseConnector:
             
 
 
+#db_connector = DatabaseConnector(creds_path='db_creds.yaml')
 
-db_connector = DatabaseConnector(creds_path='db_creds.yaml')
-
-table_names = db_connector.list_db_tables()
-print(table_names)
+#table_names = db_connector.list_db_tables()
+#print(table_names)
