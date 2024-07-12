@@ -14,5 +14,3 @@ class DataExtractor:
 
 
 
-    # Methods for extracting data from different sources will be defined here
-    # These methods will include extracting data from CSV files, APIs, and S3 buckets

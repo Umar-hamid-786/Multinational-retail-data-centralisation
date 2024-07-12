@@ -32,7 +32,7 @@ class DatabaseConnector:
         df.to_sql(table_name, engine, if_exists='replace', index=False)    
 
             
-    # Methods to connect with and upload data to the database will be defined here
+
 
 
 db_connector = DatabaseConnector(creds_path='db_creds.yaml')
