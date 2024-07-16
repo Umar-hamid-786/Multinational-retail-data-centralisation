@@ -23,8 +23,34 @@ class DataCleaning:
         #df = df[df['country_code'].isin(valid_country_codes)]
         return df
     def clean_card_data(self, df):
+         df['date_payment_confirmed'] = pd.to_datetime(df['date_payment_confirmed'], errors='coerce')
          df.dropna(inplace=True)  # Drop rows with NULL values
          df.drop_duplicates(inplace=True)  # Remove duplicate rows
          return df
+    def clean_store_data(self,df):
+        df['address'] = df['address'].str.replace('\n', ', ')
+        # For simplicity, filling NaNs with a placeholder. Adjust based on the context of your data.
+        df['lat'].fillna(0, inplace=True)
+        df['longitude'].fillna(0, inplace=True)
+        df['locality'].fillna('Unknown', inplace=True)
+        df['continent'] = df['continent'].replace('eeEurope', 'Europe')
+        df['continent'] = df['continent'].replace('eeAmerica', 'America')
+        df['opening_date'] = pd.to_datetime(df['opening_date'], errors='coerce')
+        df['longitude'] = pd.to_numeric(df['longitude'], errors='coerce')
+        df['latitude'] = pd.to_numeric(df['latitude'], errors='coerce')
+        # Trim whitespace from text fields
+        df['address'] = df['address'].str.strip()
+        df['locality'] = df['locality'].str.strip()
+        df['country_code'] = df['country_code'].str.strip()
+        df['continent'] = df['continent'].str.strip()
+        df.drop(columns=['index'], inplace=True)
+        valid_country_codes = ['DE', 'GB', 'US']
+        df = df[df['country_code'].isin(valid_country_codes)]
+        df.dropna(inplace=True)  # Drop rows with NULL values
+        df.drop_duplicates(inplace=True)  # Remove duplicate rows
+        return df
+
+
+
 
 
