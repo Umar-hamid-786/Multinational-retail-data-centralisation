@@ -2,7 +2,9 @@
 import pandas as pd
 import tabula
 import requests
-
+import boto3
+import os
+import tempfile
 
 class DataExtractor:
     def __init__(self):
@@ -40,7 +42,21 @@ class DataExtractor:
                 response.raise_for_status()
         # Convert the list of store data to a pandas DataFrame
         store_data_df = pd.DataFrame(store_data_list)
-        return store_data_df       
+        return store_data_df     
+
+    def extract_from_s3(self, s3_address):
+        # Remove the "s3://" prefix and split into bucket name and key
+        s3_address = s3_address.replace("s3://", "")
+        bucket_name, key = s3_address.split('/', 1) 
+        s3 = boto3.client('s3')
+        #with tempfile.NamedTemporaryFile(delete=False, suffix='.csv') as tmp_file:
+        local_path = os.getcwd() + "\product_tables.csv"
+
+        s3.download_file(bucket_name, key, local_path)
+        # Read the CSV content into a pandas DataFrame
+        df = pd.read_csv(local_path)
+        return df
+
 
 
 

@@ -82,6 +82,11 @@ def main():
     upload_df_stores = df_cleaned_stores
     db_connector_2.upload_to_db(upload_df_stores, 'dim_store_details')
 
+    # Extract the data from S3
+    s3_address = 's3://data-handling-public/products.csv'
+    df_s3 = data_extractor.extract_from_s3(s3_address)
+    print("Data extracted from S3:", df_s3.head())
+
 
 
 

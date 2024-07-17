@@ -49,8 +49,57 @@ class DataCleaning:
         df.dropna(inplace=True)  # Drop rows with NULL values
         df.drop_duplicates(inplace=True)  # Remove duplicate rows
         return df
+    
+    def convert_product_weights(self,df):
+
+        def convert_multiples(weight):
+            try:
+                weight = str(weight)
+                if 'x' in weight:
+                    weight = str(weight).strip('gkg')
+                    parts = weight.split('x')
+                    quantity = float(parts[0].strip())
+                    unit_weight = float(parts[1].strip())
+                    total_weight = quantity * unit_weight
+                    return str(total_weight)
+                else:
+                    return weight
+            except ValueError:
+                return None
 
 
+        def convert_weight(weight):
+            try:
+                weight = str(weight).lower().strip()
+                if 'kg' in weight:
+                    return float(weight.replace('kg', '').strip())
+                elif 'g' in weight:
+                    return float(weight.replace('g', '').strip()) / 1000
+                elif 'ml' in weight:
+                    return float(weight.replace('ml', '').strip()) / 1000
+                elif 'l' in weight:
+                    return float(weight.replace('l', '').strip())
+                elif 'oz' in weight:
+                    return float(weight.replace('oz','').strip()) * 0.28 
+                else:
+                    return float(weight)
+            except ValueError:
+                return None
+        
+
+        df['weight'] = df['weight'].apply(convert_multiples) 
+        df['weight'] = df['weight'].apply(convert_weight)
+        #df['weight'] = pd.to_numeric(df['weight'], errors='coerce')
+        #df.dropna(subset=['weight'], inplace=True)
+        return df       
+        
 
 
-
+    def clean_products_data(self, df):
+        df.drop(columns=['Unnamed: 0'], inplace=True)
+        #df = df.drop(df[df['weight'] != float])
+        df.dropna(inplace=True)  # Drop rows with NULL values
+        df.drop_duplicates(inplace=True)  # Remove duplicate rows
+        df['date_added'] = pd.to_datetime(df['date_added'], errors='coerce')
+        return df
+        
