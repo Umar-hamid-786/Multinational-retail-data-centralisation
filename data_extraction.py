@@ -5,6 +5,7 @@ import requests
 import boto3
 import os
 import tempfile
+import json
 
 class DataExtractor:
     def __init__(self):
@@ -56,7 +57,17 @@ class DataExtractor:
         # Read the CSV content into a pandas DataFrame
         df = pd.read_csv(local_path)
         return df
-
+    
+    def extract_from_s3_general(self, bucket_name, file_key):
+        # Initialize S3 client
+        s3_client = boto3.client('s3')
+        local_path = os.getcwd() + "/date_details.json"
+        # Step 1: Download the JSON file from S3
+        s3_client.download_file(bucket_name, file_key, local_path)
+        with open('date_details.json') as f:
+            data = json.load(f)
+            df = pd.DataFrame(data)
+        return df 
 
 
 

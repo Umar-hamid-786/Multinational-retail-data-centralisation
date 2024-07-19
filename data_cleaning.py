@@ -102,4 +102,19 @@ class DataCleaning:
         df.drop_duplicates(inplace=True)  # Remove duplicate rows
         df['date_added'] = pd.to_datetime(df['date_added'], errors='coerce')
         return df
-        
+
+
+    def clean_orders_data(self, df):
+            df.drop(columns=['index'], inplace=True)
+            df.drop(columns=['first_name'], inplace=True)
+            df.drop(columns=['last_name'], inplace=True)
+            df.drop(columns=['1'], inplace=True)
+            df.dropna(inplace=True)  # Drop rows with NULL values
+            df.drop_duplicates(inplace=True)  # Remove duplicate rows
+            return df
+    
+    def clean_date_times(self,df):
+        df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
+        df.dropna(inplace=True)  # Drop rows with NULL values
+        df.drop_duplicates(inplace=True)  # Remove duplicate rows
+        return df 
