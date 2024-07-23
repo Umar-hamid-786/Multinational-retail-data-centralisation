@@ -27,7 +27,7 @@ def main():
     data_extractor = DataExtractor()
 
     #Extract the data users from RDS
-    df = data_extractor.read_rds_table(db_connector_1, 'legacy_users')
+    #df = data_extractor.read_rds_table(db_connector_1, 'legacy_users')
     #print(df.head())
 
     #Extract the data users from RDS
@@ -43,12 +43,12 @@ def main():
     data_cleaning = DataCleaning()
 
     # Initialize DataCleaning of extracted RDS table
-    df_cleaned = data_cleaning.clean_user_data(df)
+    #df_cleaned = data_cleaning.clean_user_data(df)
     #print(df_cleaned.head())
 
     # Upload the cleaned DataFrame to the local db
-    upload_df = df_cleaned
-    db_connector_2.upload_to_db(upload_df, 'dim users 2')
+    #upload_df = df_cleaned
+    #db_connector_2.upload_to_db(upload_df, 'dim users 2')
 
     # Initialize DataCleaning of extracted RDS table
     df_cleaned_card = data_cleaning.clean_card_data(pdf_data)
@@ -56,7 +56,7 @@ def main():
 
     # Upload the cleaned DataFrame to the local db
     upload_df_card = df_cleaned_card 
-    db_connector_2.upload_to_db(upload_df_card, 'dim_card_details')
+    db_connector_2.upload_to_db(upload_df_card, 'dim_card_details_new')
 
     # Define the headers
     headers = {
@@ -68,24 +68,24 @@ def main():
     store_details_endpoint = "https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/store_details"
 
     # Step 1: Get the number of stores
-    number_of_stores = DataExtractor.list_number_of_stores(number_of_stores_endpoint, headers)
-    print(number_of_stores)
+    #number_of_stores = DataExtractor.list_number_of_stores(number_of_stores_endpoint, headers)
+    #print(number_of_stores)
 
     # Step 2: Retrieve all stores data
-    stores_data_df = DataExtractor.retrieve_stores_data(store_details_endpoint, number_of_stores, headers)
-    print(stores_data_df)
+    #stores_data_df = DataExtractor.retrieve_stores_data(store_details_endpoint, number_of_stores, headers)
+    #print(stores_data_df)
 
     # Initialize DataCleaning of extracted RDS table
-    df_cleaned_stores = data_cleaning.clean_store_data(stores_data_df)
+    #df_cleaned_stores = data_cleaning.clean_store_data(stores_data_df)
 
     # Upload the cleaned DataFrame to the local db
-    upload_df_stores = df_cleaned_stores
-    db_connector_2.upload_to_db(upload_df_stores, 'dim_store_details')
+    #upload_df_stores = df_cleaned_stores
+    #db_connector_2.upload_to_db(upload_df_stores, 'dim_store_details')
 
     # Extract the data from S3
-    s3_address = 's3://data-handling-public/products.csv'
-    df_s3 = data_extractor.extract_from_s3(s3_address)
-    print("Data extracted from S3:", df_s3.head())
+    #s3_address = 's3://data-handling-public/products.csv'
+    #df_s3 = data_extractor.extract_from_s3(s3_address)
+    #print("Data extracted from S3:", df_s3.head())
 
 
 

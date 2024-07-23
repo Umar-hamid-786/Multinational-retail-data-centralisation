@@ -49,7 +49,6 @@ def main():
     upload_df_s3_date_times = df_s3_cleaned_date_times
     db_connector_2.upload_to_db(upload_df_s3_date_times, 'dim_date_times')
 
-    
     # orders table extract
     orders_table = data_extractor.read_rds_table(db_connector_1, 'orders_table')
     orders_table_cleaned = data_cleaning.clean_orders_data(orders_table)

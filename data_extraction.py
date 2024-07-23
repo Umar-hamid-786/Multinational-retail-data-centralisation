@@ -50,7 +50,6 @@ class DataExtractor:
         s3_address = s3_address.replace("s3://", "")
         bucket_name, key = s3_address.split('/', 1) 
         s3 = boto3.client('s3')
-        #with tempfile.NamedTemporaryFile(delete=False, suffix='.csv') as tmp_file:
         local_path = os.getcwd() + "\product_tables.csv"
 
         s3.download_file(bucket_name, key, local_path)
@@ -62,7 +61,7 @@ class DataExtractor:
         # Initialize S3 client
         s3_client = boto3.client('s3')
         local_path = os.getcwd() + "/date_details.json"
-        # Step 1: Download the JSON file from S3
+        # Download the JSON file from S3
         s3_client.download_file(bucket_name, file_key, local_path)
         with open('date_details.json') as f:
             data = json.load(f)
