@@ -1,7 +1,7 @@
-ALTER TABLE dim_products
+ALTER TABLE dim_products_final
 ADD COLUMN weight_class VARCHAR(20);
 
-UPDATE dim_products
+UPDATE dim_products_final
 SET weight_class = CASE
     WHEN weight < 2 THEN 'Light'
     WHEN weight >= 2 AND weight < 40 THEN 'Mid_Sized'
