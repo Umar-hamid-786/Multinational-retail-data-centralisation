@@ -30,24 +30,24 @@ Cleaned and structured data was loaded into the PostgreSQL  database 'Sales_data
 
 ### 3. Database Setup and Schema Design
 The database schema was carefully designed to normalize the data and ensure data integrity. Key tables include:
-Dim_users: Contains records of all users
-Dim_stores: Details of each store, including location and contact information.
-Dim_products: Information about the products sold, including categories and prices.
-Dim_card_details: Data on customers card details. 
-Dim_date_times: Data on every purchase
-Orders_table: A single source of truth to create a relation between every table listed for analysis. 
+- Dim_users: Contains records of all users
+- Dim_stores: Details of each store, including location and contact information.
+- Dim_products: Information about the products sold, including categories and prices.
+- Dim_card_details: Data on customers card details. 
+- Dim_date_times: Data on every purchase
+- Orders_table: A single source of truth to create a relation between every table listed for analysis. 
 Each table has been designed with appropriate data types to ensure efficient storage and querying.
 
 ### 4. Data Analysis and Querying
 The centralized database allows for comprehensive querying to derive insights and metrics. For example:
-Number of stores and their respective countries?
-Which months produced the largest amount of sales?
-How many sales are from web?
-Percentages of sales from each store type?
-Which month produced the highest amount of sales?
-Maximum staff headcount?
-Which store sells the most in a particular region?
-How quickly are consecutive sales?
+- Number of stores and their respective countries?
+- Which months produced the largest amount of sales?
+- How many sales are from web?
+- Percentages of sales from each store type?
+- Which month produced the highest amount of sales?
+- Maximum staff headcount?
+- Which store sells the most in a particular region?
+- How quickly are consecutive sales?
 
 ## What did I learn and what I found challenging
 
@@ -63,9 +63,9 @@ I also improved upon my current SQL knowledge and how to deal with more difficul
 My ability to debug certain code in python i.e., using error handling within my code, applying file handling code and using various python commands has increased before this project.
 
 # #Future Enhancements
-Data Visualization: Integration with BI tools like Tableau or Power BI for visual data analysis.
-Automated ETL Pipeline: Automating the extraction, transformation, and loading processes to update the database with new data regularly.
-Advanced Analytics: Implementing predictive analytics and machine learning models to forecast sales trends and customer behavior.
+- Data Visualization: Integration with BI tools like Tableau or Power BI for visual data analysis.
+- Automated ETL Pipeline: Automating the extraction, transformation, and loading processes to update the database with new data regularly.
+- Advanced Analytics: Implementing predictive analytics and machine learning models to forecast sales trends and customer behavior.
 
 ## Installation and Usage instructions
 
