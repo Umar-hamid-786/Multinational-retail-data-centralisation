@@ -1,6 +1,8 @@
 ALTER TABLE dim_products_final
 ADD COLUMN weight_class VARCHAR(20);
 
+-- Create a new weight_class column to create classes for the weight of products 
+
 UPDATE dim_products_final
 SET weight_class = CASE
     WHEN weight < 2 THEN 'Light'
