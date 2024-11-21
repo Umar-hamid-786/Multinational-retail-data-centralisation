@@ -1,6 +1,7 @@
 --ALTER TABLE dim_store_details
 --DROP COLUMN lat;
 
+--Alter dim store table to ensure all N/A entries are NULL
 UPDATE dim_store_original_v2
 SET longitude = NULL
 WHERE longitude = 'N/A';
@@ -11,6 +12,8 @@ WHERE latitude = 'N/A';
 
 
 SELECT MAX(LENGTH(store_code)) FROM dim_store_original;
+
+--Cast the correct data types in dim store table 
 ALTER TABLE dim_store_original_v2
     ALTER COLUMN longitude TYPE FLOAT USING longitude::FLOAT,
     ALTER COLUMN locality TYPE VARCHAR(255),
