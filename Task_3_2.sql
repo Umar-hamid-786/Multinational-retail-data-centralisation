@@ -2,7 +2,7 @@
 --SELECT MAX(LENGTH(store_code::TEXT)) FROM orders_table; -- Result: 12
 --SELECT MAX(LENGTH(product_code::TEXT)) FROM orders_table; -- Result: 11
 
--- Alter table based on the determined lengths
+-- Cast the Columns of Dim_users table to correct data types
 ALTER TABLE dim_users_cleaned
 	ALTER COLUMN first_name TYPE VARCHAR(255),
 	ALTER COLUMN last_name TYPE VARCHAR(255),
