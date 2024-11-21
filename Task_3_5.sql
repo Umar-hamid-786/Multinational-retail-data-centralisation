@@ -5,9 +5,13 @@ RENAME COLUMN removed TO still_available;
 --SELECT MAX(LENGTH("product_code")) FROM dim_products;
 --SELECT MAX(LENGTH("weight_class")) FROM dim_products;
 
+-- Replace Pound sign with empty space to normalise column 
+
 UPDATE dim_products_final
 SET product_price = REPLACE(product_price, '£', '')
 
+-- Cast correct data types to dim_proucts table including a bool type column.
+  
 ALTER TABLE dim_products_final
 ALTER COLUMN product_price TYPE FLOAT USING product_price::FLOAT,
 ALTER COLUMN weight TYPE FLOAT USING weight::FLOAT,
