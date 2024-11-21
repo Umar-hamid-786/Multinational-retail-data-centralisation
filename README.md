@@ -1,4 +1,9 @@
 # multinational-retail-data-centralisation406
+
+![ERD Diagram](ERD.png)
+
+
+
 ## Table of Contents, if the README file is long
 
 - [Overview of project](#overview)
