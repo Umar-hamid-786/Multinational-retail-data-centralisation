@@ -1,4 +1,4 @@
-# multinational-retail-data-centralisation406
+# Multinational-retail-data-centralisation
 
 ![ERD Diagram](ERD.png)
 
