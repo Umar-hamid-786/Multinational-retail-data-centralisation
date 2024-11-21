@@ -2,7 +2,7 @@
 --SELECT MAX(LENGTH(store_code::TEXT)) FROM orders_table; -- Result: 12
 --SELECT MAX(LENGTH(product_code::TEXT)) FROM orders_table; -- Result: 11
 
--- Alter table based on the determined lengths
+-- Cast the columns of Orders table to correct data types
 ALTER TABLE orders_table
     ALTER COLUMN date_uuid TYPE UUID USING date_uuid::UUID,
     ALTER COLUMN user_uuid TYPE UUID USING user_uuid::UUID,
