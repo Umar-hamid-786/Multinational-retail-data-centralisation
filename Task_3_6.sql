@@ -3,6 +3,9 @@
 --SELECT MAX(LENGTH("day")) FROM dim_date_times
 --SELECT MAX(LENGTH("time_period")) FROM dim_date_times
 
+
+--Cast the correct data types to dim_date_times table
+
 ALTER TABLE dim_date_times
 ALTER COLUMN month TYPE VARCHAR(2) USING month::VARCHAR(2),
 ALTER COLUMN year TYPE VARCHAR(4) USING year::VARCHAR(4),
