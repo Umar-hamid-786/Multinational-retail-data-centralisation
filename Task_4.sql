@@ -1,17 +1,24 @@
 
 -- TASK 1
+
+-- How many stores does the business have and in which countries?
 SELECT country_code, COUNT(*) AS total_no_stores  --Counts the total number of rows for each country_code and names this count total_no_stores.
 FROM dim_store_original_v2
 GROUP BY country_code
 ORDER BY total_no_stores DESC;
 
 --Task 2 
+
+-- Which locations currently have the most stores?
 SELECT locality, COUNT(*) AS stores_location --Counts the total number of rows for each locality and names this count stores_location
 FROM dim_store_original_v2
 GROUP BY locality 
 ORDER BY stores_location DESC;
 
 --Task 3
+
+
+-- Which months produced the largest amount of sales?
 SELECT
     ddt.month,
     SUM(dp.product_price * ot.product_quantity) AS total_sales
@@ -27,6 +34,9 @@ ORDER BY
     total_sales DESC;
 
 --TASK 4
+
+
+-- How many sales are coming from online?
 SELECT
     SUM(CASE WHEN store_type = 'Web Portal' THEN 1 ELSE 0 END) AS online_sales,
     SUM(CASE WHEN store_type != 'Web Portal' THEN 1 ELSE 0 END) AS offline_sales
@@ -49,6 +59,9 @@ ORDER BY
 	location;
 
 --TASK 5
+
+
+-- What percentage of sales come through each type of store?
 WITH total_sales_cte AS (
     SELECT
         SUM(product_quantity * product_price) AS total_sales
@@ -72,6 +85,9 @@ GROUP BY store_type
 ORDER BY total_sales DESC;
 
 --TASK 6
+
+
+-- Which month in each year produced the highest cost of sales?
 SELECT 
 	SUM(product_quantity * product_price) AS total_sales,
 	ddt.year,
@@ -84,6 +100,9 @@ GROUP BY
 ORDER BY total_sales DESC;
 
 --TASK 7
+
+
+-- What is our staff headcount?
 SELECT 
 	SUM(staff_numbers) AS total_staff_numbers,
 	country_code 
@@ -93,6 +112,10 @@ country_code
 ORDER BY total_staff_numbers DESC 
 
 --TASK 8
+
+
+-- Which German store type is selling the most?
+	
 SELECT 
 	SUM(product_quantity * dp.product_price) AS total_sales,
 	ds.store_type,
@@ -108,6 +131,7 @@ ORDER BY total_sales DESC;
 
 --TASK 9
 
+-- How quickly is the company making sales?
 
 -- Creating the full date column
 WITH FullDateTime AS (
